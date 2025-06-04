@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Если запрашиваемый файл СУЩЕСТВУЕТ на диске, не применяем правила перезаписи
+RewriteCond %{REQUEST_FILENAME} !-f
+# Если запрашиваемая директория СУЩЕСТВУЕТ на диске, не применяем правила перезаписи
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Если ни одно из вышеуказанных условий не выполнилось (т.е. файл или директория не существуют),
+# то перезаписываем запрос на index.php
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+AddDefaultCharset UTF-8
+php_value default_charset "UTF-8"
+php_value mbstring.internal_encoding "UTF-8"
